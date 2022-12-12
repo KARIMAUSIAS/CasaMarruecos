@@ -29,7 +29,6 @@ public class UsuarioEntity implements Serializable {
     private String apellido1;
     private String apellido2;
     private String email;
-    private String telefono;
     private String usuario;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -83,14 +82,6 @@ public class UsuarioEntity implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
 
     public String getUsuario() {
