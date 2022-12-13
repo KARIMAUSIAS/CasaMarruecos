@@ -1,6 +1,9 @@
 package com.casamarruecos.CasaMarruecos.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -21,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UsuarioEntity implements Serializable {
 
+    /*Atributos comunes */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,18 +35,49 @@ public class UsuarioEntity implements Serializable {
     private String apellido1;
     private String apellido2;
     private String email;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_tipousuario")
+    private TipousuarioEntity tipousuario;
+
     private String usuario;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String contraseña;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_tipousuario")
-    private TipousuarioEntity tipousuario;
+    //Atributos comunes entre socios y voluntarios
 
+    private String localidad;
+    private String domicilio;
+    private String telefono;
+    private String dni;
 
-    
+    //Atributos de voluntarios
+    private LocalDate fechaNacimiento;
+    private boolean camara;
+    private boolean carnetConducir;
+    private boolean coche;
+    private boolean accesoInternet;
+    private boolean facebook;
+    private String telefonoFijo;
+    private String estudios;
+    private String ocupacionActual;
+    /*
+    private List<String> idiomas;
+    private List<String> hobbies
+    */
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private final List<ParticipacionEntity> participaciones;
+
+    public UsuarioEntity() {
+        this.participaciones = new ArrayList<>();
+    }
+
     public UsuarioEntity(Long id) {
+        this.participaciones = new ArrayList<>();
         this.id = id;
     }
 

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.casamarruecos.CasaMarruecos.bean.UsuarioBean;
@@ -12,9 +13,10 @@ import com.casamarruecos.CasaMarruecos.exception.UnauthorizedException;
 import com.casamarruecos.CasaMarruecos.helper.TipoUsuarioHelper;
 import com.casamarruecos.CasaMarruecos.repository.UsuarioRepository;
 
+@Service
 public class AuthService {
     @Autowired
-    HttpSession oHttpSession;
+    private HttpSession oHttpSession;
 
     @Autowired
     UsuarioRepository oUsuarioRepository;

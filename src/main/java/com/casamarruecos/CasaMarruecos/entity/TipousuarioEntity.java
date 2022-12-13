@@ -3,31 +3,43 @@ package com.casamarruecos.CasaMarruecos.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+@Entity
+@Table(name = "tipousuario")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class TipousuarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String nombre;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "tipousuario", fetch = FetchType.LAZY)
     private final List<UsuarioEntity> usuarios;
+
+    
 
     public TipousuarioEntity() {
         this.usuarios = new ArrayList<>();
     }
 
-    public TipousuarioEntity(Long id, String name, List<UsuarioEntity> usuarios) {
+
+    public TipousuarioEntity(Long id) {
+        this.usuarios = new ArrayList<>();
         this.id = id;
-        this.name = name;
-        this.usuarios = usuarios;
     }
+
 
     public Long getId() {
         return id;
@@ -37,12 +49,12 @@ public class TipousuarioEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getnombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setnombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public List<UsuarioEntity> getUsuarios() {

@@ -61,7 +61,6 @@ CREATE TABLE `usuario` (
   `apellido1` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `apellido2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `telefono` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `id_tipousuario` bigint(20) NOT NULL,
   `usuario` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `contraseña` varchar(255) COLLATE utf8_unicode_ci NOT NULL
