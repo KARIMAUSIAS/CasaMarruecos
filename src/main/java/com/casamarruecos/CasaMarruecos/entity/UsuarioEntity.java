@@ -61,9 +61,9 @@ public class UsuarioEntity implements Serializable {
     private boolean accesoInternet;
     private boolean facebook;
     private String telefonoFijo;
-    private String estudios;
     private String ocupacionActual;
     /*
+    private List<String> estudios;
     private List<String> idiomas;
     private List<String> hobbies
     */
@@ -144,5 +144,107 @@ public class UsuarioEntity implements Serializable {
     public void setTipousuario(TipousuarioEntity tipousuario) {
         this.tipousuario = tipousuario;
     }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public boolean isCamara() {
+        return camara;
+    }
+
+    public void setCamara(boolean camara) {
+        this.camara = camara;
+    }
+
+    public boolean isCarnetConducir() {
+        return carnetConducir;
+    }
+
+    public void setCarnetConducir(boolean carnetConducir) {
+        this.carnetConducir = carnetConducir;
+    }
+
+    public boolean isCoche() {
+        return coche;
+    }
+
+    public void setCoche(boolean coche) {
+        this.coche = coche;
+    }
+
+    public boolean isAccesoInternet() {
+        return accesoInternet;
+    }
+
+    public void setAccesoInternet(boolean accesoInternet) {
+        this.accesoInternet = accesoInternet;
+    }
+
+    public boolean isFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(boolean facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getTelefonoFijo() {
+        return telefonoFijo;
+    }
+
+    public void setTelefonoFijo(String telefonoFijo) {
+        this.telefonoFijo = telefonoFijo;
+    }
+
+    public String getOcupacionActual() {
+        return ocupacionActual;
+    }
+
+    public void setOcupacionActual(String ocupacionActual) {
+        this.ocupacionActual = ocupacionActual;
+    }
+
+    public List<ParticipacionEntity> getParticipaciones() {
+        return participaciones;
+    }
+
+    
 
 }
