@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "evento")
@@ -30,11 +29,9 @@ public class EventoEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private LocalDateTime fecha;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "evento", fetch = FetchType.LAZY)
     private final List<ParticipacionEntity> participaciones;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "evento", fetch = FetchType.LAZY)
     private final List<MultimediaEntity> multimedias;
 
@@ -81,12 +78,12 @@ public class EventoEntity {
         this.fecha = fecha;
     }
 
-    public List<ParticipacionEntity> getParticipaciones() {
-        return participaciones;
+    public int getParticipaciones() {
+        return participaciones.size();
     }
 
-    public List<MultimediaEntity> getMultimedias() {
-        return multimedias;
+    public int getMultimedias() {
+        return multimedias.size();
     }
 
 

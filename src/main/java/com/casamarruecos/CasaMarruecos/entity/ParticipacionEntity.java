@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -20,12 +19,12 @@ public class ParticipacionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_evento")
     private EventoEntity evento;
 
-    @JsonBackReference
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuario;

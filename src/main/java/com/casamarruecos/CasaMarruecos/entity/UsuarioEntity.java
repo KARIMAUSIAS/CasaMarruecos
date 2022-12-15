@@ -1,7 +1,6 @@
 package com.casamarruecos.CasaMarruecos.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -36,7 +33,7 @@ public class UsuarioEntity implements Serializable {
     private String apellido2;
     private String email;
 
-    @JsonBackReference
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_tipousuario")
     private TipousuarioEntity tipousuario;
@@ -54,7 +51,7 @@ public class UsuarioEntity implements Serializable {
     private String dni;
 
     //Atributos de voluntarios
-    private LocalDate fechaNacimiento;
+    /*private LocalDate fechaNacimiento;
     private boolean camara;
     private boolean carnetConducir;
     private boolean coche;
@@ -62,13 +59,13 @@ public class UsuarioEntity implements Serializable {
     private boolean facebook;
     private String telefonoFijo;
     private String ocupacionActual;
-    /*
+    
     private List<String> estudios;
     private List<String> idiomas;
     private List<String> hobbies
     */
 
-    @JsonManagedReference
+    
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private final List<ParticipacionEntity> participaciones;
 
@@ -176,7 +173,7 @@ public class UsuarioEntity implements Serializable {
     public void setDni(String dni) {
         this.dni = dni;
     }
-
+    /*
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -239,10 +236,10 @@ public class UsuarioEntity implements Serializable {
 
     public void setOcupacionActual(String ocupacionActual) {
         this.ocupacionActual = ocupacionActual;
-    }
+    }*/
 
-    public List<ParticipacionEntity> getParticipaciones() {
-        return participaciones;
+    public int getParticipaciones() {
+        return participaciones.size();
     }
 
     

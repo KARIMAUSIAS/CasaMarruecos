@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "tipousuario")
@@ -24,7 +23,7 @@ public class TipousuarioEntity {
 
     private String nombre;
 
-    @JsonManagedReference
+    
     @OneToMany(mappedBy = "tipousuario", fetch = FetchType.LAZY)
     private final List<UsuarioEntity> usuarios;
 
@@ -57,8 +56,8 @@ public class TipousuarioEntity {
         this.nombre = nombre;
     }
 
-    public List<UsuarioEntity> getUsuarios() {
-        return usuarios;
+    public int getUsuarios() {
+        return usuarios.size();
     }
 
     

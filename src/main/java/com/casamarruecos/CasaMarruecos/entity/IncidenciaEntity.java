@@ -14,10 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "incidencia")
@@ -34,12 +32,12 @@ public class IncidenciaEntity {
 
     private String descripcion;
 
-    @JsonBackReference
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuario;
 
-    @JsonManagedReference
+    
     @OneToMany(mappedBy = "incidencia", fetch = FetchType.LAZY)
     private final List<AccionEntity> acciones;
 
@@ -93,8 +91,8 @@ public class IncidenciaEntity {
         this.usuario = usuario;
     }
 
-    public List<AccionEntity> getAcciones() {
-        return acciones;
+    public int getAcciones() {
+        return acciones.size();
     }
 
     

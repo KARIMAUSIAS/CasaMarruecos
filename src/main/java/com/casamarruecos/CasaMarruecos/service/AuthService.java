@@ -1,6 +1,5 @@
 package com.casamarruecos.CasaMarruecos.service;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +74,18 @@ public class AuthService {
             return false;
         } else {
             return true;
+        }
+    }
+    public void OnlyAdminsOrOwnUsersData(Long id) {
+        UsuarioEntity oUserSessionEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
+        if (oUserSessionEntity != null) {
+            if (oUserSessionEntity.getTipousuario().getId().equals(TipoUsuarioHelper.USER)) {
+                if (!oUserSessionEntity.getId().equals(id)) {
+                    throw new UnauthorizedException("this request is only allowed for your own data");
+                }
+            }
+        } else {
+            throw new UnauthorizedException("this request is only allowed to user or admin role");
         }
     }
 }

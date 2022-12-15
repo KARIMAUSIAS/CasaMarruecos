@@ -9,18 +9,26 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>net.ausiasmarch</groupId>
-    <artifactId>andamioServer</artifactId>
+    <artifactId>casaMarruecos</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>andamioServer</name>
+    <name>casaMarruecos</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
     </properties>
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -29,6 +37,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -36,15 +45,15 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>        
         <!-- Swagger UI -->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -56,24 +65,6 @@
             <artifactId>springdoc-openapi-data-rest</artifactId>
             <version>1.6.4</version>
         </dependency>
-         <!-- -->        
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>0.11.5</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>0.11.5</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
-            <version>0.11.5</version>
-            <scope>runtime</scope>
-        </dependency>        
     </dependencies>
 
     <build>
