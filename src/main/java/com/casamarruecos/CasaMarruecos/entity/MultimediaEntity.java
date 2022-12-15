@@ -25,7 +25,7 @@ public class MultimediaEntity {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_evento")
-    private Long evento;
+    private EventoEntity evento;
 
     public Long getId() {
         return id;
@@ -43,11 +43,11 @@ public class MultimediaEntity {
         this.archivo = archivo;
     }
 
-    public Long getEvento() {
+    public EventoEntity getEvento() {
         return evento;
     }
 
-    public void setEvento(Long evento) {
+    public void setEvento(EventoEntity evento) {
         this.evento = evento;
     }
 

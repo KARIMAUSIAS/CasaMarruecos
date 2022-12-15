@@ -31,7 +31,7 @@ public class AccionEntity {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_incidencia")
-    private Long incidencia;
+    private IncidenciaEntity incidencia;
 
     public Long getId() {
         return id;
@@ -57,14 +57,15 @@ public class AccionEntity {
         this.fecha = fecha;
     }
 
-    public Long getIncidencia() {
+    public IncidenciaEntity getIncidencia() {
         return incidencia;
     }
 
-    public void setIncidencia(Long incidencia) {
+    public void setIncidencia(IncidenciaEntity incidencia) {
         this.incidencia = incidencia;
     }
 
+    
     
     
 

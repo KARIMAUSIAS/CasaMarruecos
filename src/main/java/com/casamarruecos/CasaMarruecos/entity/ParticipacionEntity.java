@@ -23,12 +23,12 @@ public class ParticipacionEntity {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_evento")
-    private Long evento;
+    private EventoEntity evento;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
-    private Long usuario;
+    private UsuarioEntity usuario;
 
     public Long getId() {
         return id;
@@ -38,21 +38,23 @@ public class ParticipacionEntity {
         this.id = id;
     }
 
-    public Long getEvento() {
+    public EventoEntity getEvento() {
         return evento;
     }
 
-    public void setEvento(Long evento) {
+    public void setEvento(EventoEntity evento) {
         this.evento = evento;
     }
 
-    public Long getUsuario() {
+    public UsuarioEntity getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Long usuario) {
+    public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }
+
+    
 
 
     

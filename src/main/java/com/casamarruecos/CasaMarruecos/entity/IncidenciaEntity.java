@@ -37,7 +37,7 @@ public class IncidenciaEntity {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
-    private Long usuario;
+    private UsuarioEntity usuario;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "incidencia", fetch = FetchType.LAZY)
@@ -85,11 +85,11 @@ public class IncidenciaEntity {
         this.fecha = fecha;
     }
 
-    public Long getUsuario() {
+    public UsuarioEntity getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Long usuario) {
+    public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }
 
