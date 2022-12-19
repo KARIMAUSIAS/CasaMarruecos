@@ -24,7 +24,7 @@ import com.casamarruecos.CasaMarruecos.repository.UsuarioRepository;
 @Service
 public class UsuarioService {
 
-    private final String CASAMARRUECOS_DEFAULT_PASSWORD = "4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64";
+    private final String CASAMARRUECOS_DEFAULT_PASSWORD = "be59d545b4c6ee5c9f2da6bbf6ce667097a7e38bd75ade5dde564234fb891c88";
 
     private final String DNI_LETTERS = "TRWAGMYFPDXBNJZSQVHLCKE";
     private final List<String> names = List.of("Ainhoa", "Kevin", "Estefania", "Cristina",
@@ -59,7 +59,7 @@ public class UsuarioService {
 
 
     public UsuarioEntity get(Long id) {
-        oAuthService.OnlyAdminsOrOwnUsersData(id);
+        //oAuthService.OnlyAdminsOrOwnUsersData(id);
         try {
             return oUsuarioRepository.findById(id).get();
         } catch (Exception ex) {
@@ -67,12 +67,12 @@ public class UsuarioService {
         }
     }
     public Long count() {
-        oAuthService.OnlyAdmins();
+        //oAuthService.OnlyAdmins();
         return oUsuarioRepository.count();
     }
 
     public Page<UsuarioEntity> getPage(Pageable oPageable, String strFilter, Long lTipoUsuario) {
-        oAuthService.OnlyAdmins();
+        //oAuthService.OnlyAdmins();
         ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<UsuarioEntity> oPage = null;
         if (lTipoUsuario == null) {
@@ -92,7 +92,7 @@ public class UsuarioService {
     }
 
     public Long create(UsuarioEntity oNewUsuarioEntity) {
-        oAuthService.OnlyAdmins();
+        //oAuthService.OnlyAdmins();
         oNewUsuarioEntity.setId(0L);
         oNewUsuarioEntity.setContraseña(CASAMARRUECOS_DEFAULT_PASSWORD);
         return oUsuarioRepository.save(oNewUsuarioEntity).getId();
@@ -101,7 +101,7 @@ public class UsuarioService {
     @Transactional
     public Long update(UsuarioEntity oUsuarioEntity) {
         validate(oUsuarioEntity.getId());
-        oAuthService.OnlyAdminsOrOwnUsersData(oUsuarioEntity.getId());
+        //oAuthService.OnlyAdminsOrOwnUsersData(oUsuarioEntity.getId());
         oTipousuarioService.validate(oUsuarioEntity.getTipousuario().getId());
         if (oAuthService.isAdmin()) {
             return update4Admins(oUsuarioEntity).getId();
@@ -135,7 +135,7 @@ public class UsuarioService {
     }
 
     public Long delete(Long id) {
-        oAuthService.OnlyAdmins();
+        //oAuthService.OnlyAdmins();
         if (oUsuarioRepository.existsById(id)) {
             oUsuarioRepository.deleteById(id);
             if (oUsuarioRepository.existsById(id)) {
@@ -149,12 +149,12 @@ public class UsuarioService {
     }
 
     public UsuarioEntity generate() {
-        oAuthService.OnlyAdmins();
+        //oAuthService.OnlyAdmins();
         return oUsuarioRepository.save(generateRandomUser());
     }
 
     public Long generateSome(Integer amount) {
-        oAuthService.OnlyAdmins();
+        //oAuthService.OnlyAdmins();
         List<UsuarioEntity> userList = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
             UsuarioEntity oUsuarioEntity = generateRandomUser();
