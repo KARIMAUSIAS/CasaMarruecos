@@ -45,13 +45,13 @@ public class UsuarioEntity implements Serializable {
 
     //Atributos comunes entre socios y voluntarios
 
-    private String localidad;
+    /*private String localidad;
     private String domicilio;
     private String telefono;
     private String dni;
 
     //Atributos de voluntarios
-    /*private LocalDate fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private boolean camara;
     private boolean carnetConducir;
     private boolean coche;
@@ -141,7 +141,7 @@ public class UsuarioEntity implements Serializable {
     public void setTipousuario(TipousuarioEntity tipousuario) {
         this.tipousuario = tipousuario;
     }
-
+/*
     public String getLocalidad() {
         return localidad;
     }
@@ -173,7 +173,7 @@ public class UsuarioEntity implements Serializable {
     public void setDni(String dni) {
         this.dni = dni;
     }
-    /*
+    
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }

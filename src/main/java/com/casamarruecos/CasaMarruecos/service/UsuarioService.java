@@ -113,7 +113,6 @@ public class UsuarioService {
     @Transactional
     private UsuarioEntity update4Admins(UsuarioEntity oUpdatedUsuarioEntity) {
         UsuarioEntity oUsuarioEntity = oUsuarioRepository.findById(oUpdatedUsuarioEntity.getId()).get();
-        oUsuarioEntity.setDni(oUpdatedUsuarioEntity.getDni());
         oUsuarioEntity.setNombre(oUpdatedUsuarioEntity.getNombre());
         oUsuarioEntity.setApellido1(oUpdatedUsuarioEntity.getApellido1());
         oUsuarioEntity.setApellido2(oUpdatedUsuarioEntity.getApellido2());
@@ -125,7 +124,6 @@ public class UsuarioService {
     @Transactional
     private UsuarioEntity update4Users(UsuarioEntity oUpdatedUsuarioEntity) {
         UsuarioEntity oUsuarioEntity = oUsuarioRepository.findById(oUpdatedUsuarioEntity.getId()).get();
-        oUsuarioEntity.setDni(oUpdatedUsuarioEntity.getDni());
         oUsuarioEntity.setNombre(oUpdatedUsuarioEntity.getNombre());
         oUsuarioEntity.setApellido1(oUpdatedUsuarioEntity.getApellido1());
         oUsuarioEntity.setApellido2(oUpdatedUsuarioEntity.getApellido2());
@@ -179,7 +177,6 @@ public class UsuarioService {
 
     private UsuarioEntity generateRandomUser() {
         UsuarioEntity oUserEntity = new UsuarioEntity();
-        oUserEntity.setDni(generateDNI());
         oUserEntity.setNombre(names.get(RandomHelper.getRandomInt(0, names.size() - 1)));
         oUserEntity.setApellido1(surnames.get(RandomHelper.getRandomInt(0, names.size() - 1)));
         oUserEntity.setApellido2(lastnames.get(RandomHelper.getRandomInt(0, lastnames.size() - 1)));
