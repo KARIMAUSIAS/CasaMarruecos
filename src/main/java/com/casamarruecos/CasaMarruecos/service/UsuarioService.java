@@ -59,7 +59,7 @@ public class UsuarioService {
 
 
     public UsuarioEntity get(Long id) {
-        //oAuthService.OnlyAdminsOrOwnUsersData(id);
+        oAuthService.OnlyAdminsOrOwnUsersData(id);
         try {
             return oUsuarioRepository.findById(id).get();
         } catch (Exception ex) {
@@ -67,12 +67,12 @@ public class UsuarioService {
         }
     }
     public Long count() {
-        //oAuthService.OnlyAdmins();
+        oAuthService.OnlyAdmins();
         return oUsuarioRepository.count();
     }
 
     public Page<UsuarioEntity> getPage(Pageable oPageable, String strFilter, Long lTipoUsuario) {
-        //oAuthService.OnlyAdmins();
+        oAuthService.OnlyAdmins();
         ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<UsuarioEntity> oPage = null;
         if (lTipoUsuario == null) {
@@ -92,7 +92,7 @@ public class UsuarioService {
     }
 
     public Long create(UsuarioEntity oNewUsuarioEntity) {
-        //oAuthService.OnlyAdmins();
+        oAuthService.OnlyAdmins();
         oNewUsuarioEntity.setId(0L);
         oNewUsuarioEntity.setContraseña(CASAMARRUECOS_DEFAULT_PASSWORD);
         return oUsuarioRepository.save(oNewUsuarioEntity).getId();
@@ -101,7 +101,7 @@ public class UsuarioService {
     @Transactional
     public Long update(UsuarioEntity oUsuarioEntity) {
         validate(oUsuarioEntity.getId());
-        //oAuthService.OnlyAdminsOrOwnUsersData(oUsuarioEntity.getId());
+        oAuthService.OnlyAdminsOrOwnUsersData(oUsuarioEntity.getId());
         oTipousuarioService.validate(oUsuarioEntity.getTipousuario().getId());
         if (oAuthService.isAdmin()) {
             return update4Admins(oUsuarioEntity).getId();
@@ -117,6 +117,7 @@ public class UsuarioService {
         oUsuarioEntity.setApellido1(oUpdatedUsuarioEntity.getApellido1());
         oUsuarioEntity.setApellido2(oUpdatedUsuarioEntity.getApellido2());
         oUsuarioEntity.setEmail(oUpdatedUsuarioEntity.getEmail());
+        oUsuarioEntity.setUsuario(oUpdatedUsuarioEntity.getUsuario());
         oUsuarioEntity.setTipousuario(oTipousuarioService.get(oUpdatedUsuarioEntity.getTipousuario().getId()));
         return oUsuarioRepository.save(oUsuarioEntity);
     }
@@ -128,12 +129,13 @@ public class UsuarioService {
         oUsuarioEntity.setApellido1(oUpdatedUsuarioEntity.getApellido1());
         oUsuarioEntity.setApellido2(oUpdatedUsuarioEntity.getApellido2());
         oUsuarioEntity.setEmail(oUpdatedUsuarioEntity.getEmail());
+        oUsuarioEntity.setUsuario(oUpdatedUsuarioEntity.getUsuario());
         oUsuarioEntity.setTipousuario(oTipousuarioService.get(2L));
         return oUsuarioRepository.save(oUsuarioEntity);
     }
 
     public Long delete(Long id) {
-        //oAuthService.OnlyAdmins();
+        oAuthService.OnlyAdmins();
         if (oUsuarioRepository.existsById(id)) {
             oUsuarioRepository.deleteById(id);
             if (oUsuarioRepository.existsById(id)) {
@@ -147,12 +149,12 @@ public class UsuarioService {
     }
 
     public UsuarioEntity generate() {
-        //oAuthService.OnlyAdmins();
+        oAuthService.OnlyAdmins();
         return oUsuarioRepository.save(generateRandomUser());
     }
 
     public Long generateSome(Integer amount) {
-        //oAuthService.OnlyAdmins();
+        oAuthService.OnlyAdmins();
         List<UsuarioEntity> userList = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
             UsuarioEntity oUsuarioEntity = generateRandomUser();
