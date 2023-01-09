@@ -14,7 +14,6 @@ import com.casamarruecos.CasaMarruecos.entity.UsuarioEntity;
 import com.casamarruecos.CasaMarruecos.exception.CannotPerformOperationException;
 import com.casamarruecos.CasaMarruecos.exception.ResourceNotFoundException;
 import com.casamarruecos.CasaMarruecos.exception.ResourceNotModifiedException;
-import com.casamarruecos.CasaMarruecos.exception.ValidationException;
 import com.casamarruecos.CasaMarruecos.helper.RandomHelper;
 import com.casamarruecos.CasaMarruecos.helper.TipoUsuarioHelper;
 import com.casamarruecos.CasaMarruecos.helper.ValidationHelper;
@@ -26,7 +25,7 @@ public class UsuarioService {
 
     private final String CASAMARRUECOS_DEFAULT_PASSWORD = "be59d545b4c6ee5c9f2da6bbf6ce667097a7e38bd75ade5dde564234fb891c88";
 
-    private final String DNI_LETTERS = "TRWAGMYFPDXBNJZSQVHLCKE";
+    //private final String DNI_LETTERS = "TRWAGMYFPDXBNJZSQVHLCKE";
     private final List<String> names = List.of("Ainhoa", "Kevin", "Estefania", "Cristina",
             "Jose Maria", "Lucas Ezequiel", "Carlos", "Elliot", "Alexis", "Ruben", "Luis Fernando", "Karim", "Luis",
             "Jose David", "Nerea", "Ximo", "Iris", "Alvaro", "Mario", "Raimon");
@@ -53,7 +52,7 @@ public class UsuarioService {
 
     public void validate(Long id) {
         if (!oUsuarioRepository.existsById(id)) {
-            throw new ResourceNotFoundException("id " + id + " not exist");
+            throw new ResourceNotFoundException("id " + id + " no existe");
         }
     }
 
@@ -63,7 +62,7 @@ public class UsuarioService {
         try {
             return oUsuarioRepository.findById(id).get();
         } catch (Exception ex) {
-            throw new ResourceNotFoundException("id " + id + " not exist");
+            throw new ResourceNotFoundException("id " + id + " no existe");
         }
     }
     public Long count() {
@@ -139,12 +138,12 @@ public class UsuarioService {
         if (oUsuarioRepository.existsById(id)) {
             oUsuarioRepository.deleteById(id);
             if (oUsuarioRepository.existsById(id)) {
-                throw new ResourceNotModifiedException("can't remove register " + id);
+                throw new ResourceNotModifiedException("no se puede borrar el registro " + id);
             } else {
                 return id;
             }
         } else {
-            throw new ResourceNotModifiedException("id " + id + " not exist");
+            throw new ResourceNotModifiedException("id " + id + " no existe");
         }
     }
 
@@ -184,7 +183,7 @@ public class UsuarioService {
         oUserEntity.setApellido2(lastnames.get(RandomHelper.getRandomInt(0, lastnames.size() - 1)));
         oUserEntity.setUsuario(oUserEntity.getNombre() + "_" + oUserEntity.getApellido1());
         oUserEntity.setContraseña(CASAMARRUECOS_DEFAULT_PASSWORD);
-        oUserEntity.setEmail(generateEmail(oUserEntity.getNombre(), oUserEntity.getApellido1()));
+        oUserEntity.setEmail(generateEmail(oUserEntity.getNombre().toLowerCase(), oUserEntity.getApellido1().toLowerCase()));
         if (RandomHelper.getRandomInt(0, 10) > 1) {
             oUserEntity.setTipousuario(oTipousuarioRepository.getById(TipoUsuarioHelper.USER));
         } else {
@@ -193,18 +192,18 @@ public class UsuarioService {
         return oUserEntity;
     }
 
-    private String generateDNI() {
+    /* private String generateDNI() {
         String dni = "";
         int dniNumber = RandomHelper.getRandomInt(11111111, 99999999 + 1);
         dni += dniNumber + "" + DNI_LETTERS.charAt(dniNumber % 23);
         return dni;
-    }
+     }*/
 
     private String generateEmail(String name, String surname) {
         List<String> list = new ArrayList<>();
         list.add(name);
         list.add(surname);
-        return getFromList(list) + "_" + getFromList(list) + "@daw.tk";
+        return getFromList(list) + "_" + getFromList(list) + "@casamarruecos.com";
     }
 
     private String getFromList(List<String> list) {

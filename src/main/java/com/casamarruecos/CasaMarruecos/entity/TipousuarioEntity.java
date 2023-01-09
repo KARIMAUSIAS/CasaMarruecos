@@ -34,9 +34,10 @@ public class TipousuarioEntity {
     }
 
 
-    public TipousuarioEntity(Long id) {
+    public TipousuarioEntity(Long id, String nombre) {
         this.usuarios = new ArrayList<>();
         this.id = id;
+        this.nombre = nombre;
     }
 
 
