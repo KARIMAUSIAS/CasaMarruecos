@@ -1,6 +1,6 @@
 package com.casamarruecos.CasaMarruecos.api;
 
-import org.hibernate.annotations.Sort;
+import org.springframework.data.domain.Sort;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,12 +37,12 @@ public class IncidenciaController {
     public ResponseEntity<Long> count() {
         return new ResponseEntity<Long>(oIncidenciaService.count(), HttpStatus.OK);
     }
-    /*@GetMapping("")
+    @GetMapping("")
     public ResponseEntity<Page<IncidenciaEntity>> getPage(
             @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
             @RequestParam(name = "filter", required = false) String strFilter,
-            @RequestParam(name = "tipoIncidencia", required = false) Long lTipoIncidencia) {
-        return new ResponseEntity<Page<IncidenciaEntity>>(oIncidenciaService.getPage(oPageable, strFilter, lTipoIncidencia), HttpStatus.OK);
+            @RequestParam(name = "usuario", required = false) Long lUsuario) {
+        return new ResponseEntity<Page<IncidenciaEntity>>(oIncidenciaService.getPage(oPageable, strFilter, lUsuario), HttpStatus.OK);
     }
 
     @PostMapping("/")
@@ -59,7 +59,7 @@ public class IncidenciaController {
     public ResponseEntity<Long> delete(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<Long>(oIncidenciaService.delete(id), HttpStatus.OK);
     }
-
+/*
     @PostMapping("/generate")
     public ResponseEntity<IncidenciaEntity> generate() {
         return new ResponseEntity<IncidenciaEntity>(oIncidenciaService.generate(), HttpStatus.OK);

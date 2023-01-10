@@ -1,6 +1,7 @@
 package com.casamarruecos.CasaMarruecos.helper;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.casamarruecos.CasaMarruecos.exception.ValidationException;
@@ -85,7 +86,7 @@ public class ValidationHelper {
         }
     }
 
-    public static void validateDate(LocalDateTime oDate, LocalDateTime oDateStart, LocalDateTime oDateEnd, String error) {
+    public static void validateDate(LocalDate oDate, LocalDate oDateStart, LocalDate oDateEnd, String error) {
         Long lDur1 = Duration.between(oDateStart, oDate).toMillis();
         Long lDur2 = Duration.between(oDate, oDateEnd).toMillis();
         if (lDur1 > 0L && lDur2 > 0L) {

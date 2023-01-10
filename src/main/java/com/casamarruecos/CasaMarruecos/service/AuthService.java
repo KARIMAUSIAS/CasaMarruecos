@@ -88,4 +88,13 @@ public class AuthService {
             throw new UnauthorizedException("this request is only allowed to user or admin role");
         }
     }
+    
+    public Long getUserID() {
+        UsuarioEntity oUsuarioSessionEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
+        if (oUsuarioSessionEntity != null) {
+            return oUsuarioSessionEntity.getId();
+        } else {
+            throw new UnauthorizedException("this request is only allowed to auth users");
+        }
+    }
 }
