@@ -1,6 +1,6 @@
 package com.casamarruecos.CasaMarruecos.service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.casamarruecos.CasaMarruecos.entity.IncidenciaEntity;
+import com.casamarruecos.CasaMarruecos.exception.CannotPerformOperationException;
 import com.casamarruecos.CasaMarruecos.exception.ResourceNotFoundException;
-import com.casamarruecos.CasaMarruecos.exception.ResourceNotModifiedException;
+import com.casamarruecos.CasaMarruecos.helper.RandomHelper;
 import com.casamarruecos.CasaMarruecos.helper.ValidationHelper;
 import com.casamarruecos.CasaMarruecos.repository.IncidenciaRepository;
+import com.casamarruecos.CasaMarruecos.repository.UsuarioRepository;
 
 @Service
 public class IncidenciaService {
@@ -29,6 +31,12 @@ public class IncidenciaService {
     @Autowired
     UsuarioService oUsuarioService;
 
+    @Autowired
+    UsuarioRepository oUsuarioRepository;
+
+    private final String [] LUGARES = {"Valencia", "Madrid", "Murcia","Barcelona","Sevilla","Melilla","Alicante","Tarragona"};
+    private final String [] DESCRIPCIONES = {"agresión a hombre marroqui", "cantos racistas a unos vecinos", "acto vandalico a mesquita","amenazas en la calle"};
+
     public void validate(Long id) {
         if (!oIncidenciaRepository.existsById(id)) {
             throw new ResourceNotFoundException("id " + id + " not exist");
@@ -36,7 +44,8 @@ public class IncidenciaService {
     }
 
     public IncidenciaEntity get(Long id) {
-        oAuthService.OnlyAdminsOrOwnUsersData(id);
+        //oAuthService.OnlyAdminsOrOwnUsersData(id);
+        oAuthService.OnlyAdmins();
         try {
             return oIncidenciaRepository.findById(id).get();
         } catch (Exception ex) {
@@ -84,7 +93,8 @@ public class IncidenciaService {
     @Transactional
     public Long update(IncidenciaEntity oIncidenciaEntity) {
         validate(oIncidenciaEntity.getId());
-        oAuthService.OnlyAdminsOrOwnUsersData(oIncidenciaEntity.getId());
+        //oAuthService.OnlyAdminsOrOwnUsersData(oIncidenciaEntity.getId());
+        oAuthService.OnlyAdmins();
         oTipousuarioService.validate(oUsuarioService.get(oAuthService.getUserID()).getTipousuario().getId());
         if (oAuthService.isAdmin()) {
             return update4Admins(oIncidenciaEntity).getId();
@@ -114,9 +124,43 @@ public class IncidenciaService {
 
     public Long delete(Long id) {
         validate(id);
-        oAuthService.OnlyAdminsOrOwnUsersData(get(id).getUsuario().getId());
+        //oAuthService.OnlyAdminsOrOwnUsersData(get(id).getUsuario().getId());
+        oAuthService.OnlyAdmins();
         oIncidenciaRepository.deleteById(id);
         return id;
     }
     
+    public IncidenciaEntity generateIncidencia() {
+        if (oUsuarioRepository.count() > 0) {
+            LocalDateTime fechaRand = RandomHelper.getRadomDate2();
+            IncidenciaEntity oIncidenciaEntity = new IncidenciaEntity();
+            oIncidenciaEntity.setFecha(fechaRand.toLocalDate());
+            oIncidenciaEntity.setDescripcion(generateDescripcion());
+            oIncidenciaEntity.setLugar(generateLugar());
+            oIncidenciaEntity.setUsuario(oUsuarioService.getOneRandom());
+            return oIncidenciaEntity;
+        } else {
+            return null;
+        }
+    }
+
+    public Long generateSome(int amount) {
+        if (oUsuarioService.count() > 0) {
+            for (int i = 0; i < amount; i++) {
+                IncidenciaEntity oIncidenciaEntity = generateIncidencia();
+                oIncidenciaRepository.save(oIncidenciaEntity);
+            }
+            return oIncidenciaRepository.count();
+        } else {
+            throw new CannotPerformOperationException("no hay usuarios en la base de datos");
+        }
+    }
+
+    private String generateLugar() {
+        return LUGARES[RandomHelper.getRandomInt(0, LUGARES.length - 1)].toLowerCase();
+    }
+
+    private String generateDescripcion() {
+        return DESCRIPCIONES[RandomHelper.getRandomInt(0, DESCRIPCIONES.length - 1)].toLowerCase();
+    }
 }

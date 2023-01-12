@@ -41,7 +41,8 @@ public class TipousuarioService {
     }
 
     public TipousuarioEntity get(Long id) {
-        oAuthService.OnlyAdminsOrOwnUsersData(id);
+        //oAuthService.OnlyAdminsOrOwnUsersData(id);
+        oAuthService.OnlyAdmins();
         try {
             return oTipousuarioRepository.findById(id).get();
         } catch (Exception ex) {

@@ -14,6 +14,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long>{
 
     UsuarioEntity findByUsuarioAndContraseña(String usuario, String contraseña);
 
+    
     UsuarioEntity findByUsuario(String usuario);
 
     boolean existsByUsuario(String usuario);
@@ -24,5 +25,4 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long>{
     Page<UsuarioEntity> findByNombreIgnoreCaseContainingOrApellido1IgnoreCaseContainingOrApellido2IgnoreCaseContaining(String nombre, String apellido1, String apellido2, Pageable oPageable);
 
     Page<UsuarioEntity> findByTipousuarioId(Long tipoproducto, Pageable oPageable);
-
 }
