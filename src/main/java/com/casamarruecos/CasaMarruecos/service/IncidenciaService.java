@@ -1,6 +1,7 @@
 package com.casamarruecos.CasaMarruecos.service;
 
 import java.time.LocalDateTime;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -129,12 +130,16 @@ public class IncidenciaService {
         oIncidenciaRepository.deleteById(id);
         return id;
     }
+
+    public IncidenciaEntity generateOne(){
+        oAuthService.OnlyAdmins();
+        return oIncidenciaRepository.save(generateIncidencia());
+    }
     
     public IncidenciaEntity generateIncidencia() {
         if (oUsuarioRepository.count() > 0) {
-            LocalDateTime fechaRand = RandomHelper.getRadomDate2();
             IncidenciaEntity oIncidenciaEntity = new IncidenciaEntity();
-            oIncidenciaEntity.setFecha(fechaRand.toLocalDate());
+            oIncidenciaEntity.setFecha(RandomHelper.getRandomLocalDate());
             oIncidenciaEntity.setDescripcion(generateDescripcion());
             oIncidenciaEntity.setLugar(generateLugar());
             oIncidenciaEntity.setUsuario(oUsuarioService.getOneRandom());
@@ -145,6 +150,7 @@ public class IncidenciaService {
     }
 
     public Long generateSome(int amount) {
+        oAuthService.OnlyAdmins();
         if (oUsuarioService.count() > 0) {
             for (int i = 0; i < amount; i++) {
                 IncidenciaEntity oIncidenciaEntity = generateIncidencia();

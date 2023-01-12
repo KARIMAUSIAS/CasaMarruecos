@@ -62,7 +62,7 @@ public class IncidenciaController {
 
     @PostMapping("/generate")
     public ResponseEntity<IncidenciaEntity> generate() {
-        return new ResponseEntity<IncidenciaEntity>(oIncidenciaService.generateIncidencia(), HttpStatus.OK);
+        return new ResponseEntity<IncidenciaEntity>(oIncidenciaService.generateOne(), HttpStatus.OK);
     }
 
     @PostMapping("/generate/{amount}")
