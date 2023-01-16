@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 12-01-2023 a las 18:24:01
+-- Tiempo de generación: 10-01-2023 a las 17:25:23
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -33,15 +33,6 @@ CREATE TABLE `accion` (
   `fecha` date NOT NULL,
   `id_incidencia` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `accion`
---
-
-INSERT INTO `accion` (`id`, `descripcion`, `fecha`, `id_incidencia`) VALUES
-(1, 'demanda colectiva', '2022-10-21', 1),
-(2, 'demanda', '2022-11-01', 2),
-(3, 'denuncia a la policia', '2022-11-12', 5);
 
 -- --------------------------------------------------------
 
@@ -76,11 +67,9 @@ CREATE TABLE `incidencia` (
 
 INSERT INTO `incidencia` (`id`, `lugar`, `fecha`, `descripcion`, `id_usuario`) VALUES
 (1, 'Valencia', '2022-08-20', 'acto vandalico a mezquita', 2),
-(2, 'Madrid', '2022-09-02', 'hurto', 2),
+(2, 'Granada', '2022-10-02', 'amenazas en la calle', 3),
 (3, 'Madrid', '2022-09-11', 'cantos racistas a unos vecinos', 4),
-(5, 'Barcelona', '2022-11-10', 'intento de robo', 7),
-(6, 'madrid', '2023-01-12', 'agresión a hombre marroqui', 2),
-(7, 'tarragona', '2023-01-12', 'amenazas en la calle', 1);
+(4, 'Valencia', '2023-01-04', 'agresión a hombre marroqui', 5);
 
 -- --------------------------------------------------------
 
@@ -226,7 +215,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `accion`
 --
 ALTER TABLE `accion`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `evento`
@@ -238,7 +227,7 @@ ALTER TABLE `evento`
 -- AUTO_INCREMENT de la tabla `incidencia`
 --
 ALTER TABLE `incidencia`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `multimedia`

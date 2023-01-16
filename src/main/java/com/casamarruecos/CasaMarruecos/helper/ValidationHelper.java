@@ -2,6 +2,7 @@ package com.casamarruecos.CasaMarruecos.helper;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.casamarruecos.CasaMarruecos.exception.ValidationException;
 

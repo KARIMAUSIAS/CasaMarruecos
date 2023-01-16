@@ -59,15 +59,15 @@ public class IncidenciaController {
     public ResponseEntity<Long> delete(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<Long>(oIncidenciaService.delete(id), HttpStatus.OK);
     }
-
+/*
     @PostMapping("/generate")
     public ResponseEntity<IncidenciaEntity> generate() {
-        return new ResponseEntity<IncidenciaEntity>(oIncidenciaService.generateOne(), HttpStatus.OK);
+        return new ResponseEntity<IncidenciaEntity>(oIncidenciaService.generate(), HttpStatus.OK);
     }
 
     @PostMapping("/generate/{amount}")
     public ResponseEntity<Long> generateSome(@PathVariable(value = "amount") Integer amount) {
         return new ResponseEntity<>(oIncidenciaService.generateSome(amount), HttpStatus.OK);
-    }
+    }*/
     
 }

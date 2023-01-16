@@ -58,8 +58,7 @@ public class UsuarioService {
 
 
     public UsuarioEntity get(Long id) {
-        //oAuthService.OnlyAdminsOrOwnUsersData(id);
-        oAuthService.OnlyAdmins();
+        oAuthService.OnlyAdminsOrOwnUsersData(id);
         try {
             return oUsuarioRepository.findById(id).get();
         } catch (Exception ex) {
@@ -101,8 +100,7 @@ public class UsuarioService {
     @Transactional
     public Long update(UsuarioEntity oUsuarioEntity) {
         validate(oUsuarioEntity.getId());
-        //oAuthService.OnlyAdminsOrOwnUsersData(oUsuarioEntity.getId());
-        oAuthService.OnlyAdmins();
+        oAuthService.OnlyAdminsOrOwnUsersData(oUsuarioEntity.getId());
         oTipousuarioService.validate(oUsuarioEntity.getTipousuario().getId());
         if (oAuthService.isAdmin()) {
             return update4Admins(oUsuarioEntity).getId();
