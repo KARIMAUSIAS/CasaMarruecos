@@ -23,7 +23,6 @@ public class AccionService {
     }
 
     public AccionEntity get(Long id) {
-        //oAuthService.OnlyAdminsOrOwnUsersData(id);
         oAuthService.OnlyAdmins();
         try {
             return oAccionRepository.findById(id).get();

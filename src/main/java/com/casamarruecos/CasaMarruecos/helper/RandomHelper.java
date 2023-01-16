@@ -1,6 +1,7 @@
 package com.casamarruecos.CasaMarruecos.helper;
 
 import java.security.SecureRandom;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -52,6 +53,18 @@ public class RandomHelper {
         int randomSeconds = new Random().nextInt(3600 * 24);
         LocalDateTime anyTime = LocalDateTime.now().minusSeconds(randomSeconds);
         return anyTime;
+    }
+
+    public static LocalDate getRandomLocalDate() {
+        LocalDate startInclusive = LocalDate.of(2010, 01, 01);
+        LocalDate endExclusive = LocalDate.now();
+        long startEpochDay = startInclusive.toEpochDay();
+        long endEpochDay = endExclusive.toEpochDay();
+        long randomDay = ThreadLocalRandom
+          .current()
+          .nextLong(startEpochDay, endEpochDay);
+
+        return LocalDate.ofEpochDay(randomDay);
     }
 
     public static char getRadomChar() {
