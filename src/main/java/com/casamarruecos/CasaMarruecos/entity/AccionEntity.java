@@ -1,6 +1,6 @@
 package com.casamarruecos.CasaMarruecos.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,8 +24,8 @@ public class AccionEntity {
 
     private String descripcion;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    private LocalDateTime fecha;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate fecha;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_incidencia")
@@ -47,11 +47,11 @@ public class AccionEntity {
         this.descripcion = descripcion;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

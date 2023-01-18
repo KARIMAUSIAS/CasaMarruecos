@@ -45,7 +45,7 @@ public class IncidenciaService {
     }
 
     public IncidenciaEntity get(Long id) {
-        oAuthService.OnlyAdminsOrOwnUsersData(id);
+        oAuthService.OnlyAdminsOrOwnUsersData(oIncidenciaRepository.findById(id).get().getUsuario().getId());
         try {
             return oIncidenciaRepository.findById(id).get();
         } catch (Exception ex) {
@@ -93,7 +93,7 @@ public class IncidenciaService {
     @Transactional
     public Long update(IncidenciaEntity oIncidenciaEntity) {
         validate(oIncidenciaEntity.getId());
-        oAuthService.OnlyAdminsOrOwnUsersData(oIncidenciaEntity.getId());
+        oAuthService.OnlyAdminsOrOwnUsersData(get(oIncidenciaEntity.getId()).getUsuario().getId());
         oTipousuarioService.validate(oUsuarioService.get(oAuthService.getUserID()).getTipousuario().getId());
         if (oAuthService.isAdmin()) {
             return update4Admins(oIncidenciaEntity).getId();
