@@ -7,21 +7,30 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.casamarruecos.CasaMarruecos.entity.AccionEntity;
+import com.casamarruecos.CasaMarruecos.exception.CannotPerformOperationException;
 import com.casamarruecos.CasaMarruecos.exception.ResourceNotFoundException;
+import com.casamarruecos.CasaMarruecos.helper.RandomHelper;
 import com.casamarruecos.CasaMarruecos.helper.ValidationHelper;
 import com.casamarruecos.CasaMarruecos.repository.AccionRepository;
+import com.casamarruecos.CasaMarruecos.repository.IncidenciaRepository;
 
 @Service
 public class AccionService {
 
     @Autowired
     AccionRepository oAccionRepository;
+
+    @Autowired
+    IncidenciaRepository oIncidenciaRepository;
     
     @Autowired
     AuthService oAuthService;
 
     @Autowired
     IncidenciaService oIncidenciaService;
+
+
+    private final String [] DESCRIPCIONES = {"denuncia colectiva", "manifestacion", "denuncia judicial"};
 
     public void validate(Long id) {
         if (!oAccionRepository.existsById(id)) {
@@ -110,5 +119,34 @@ public class AccionService {
         oAccionRepository.deleteById(id);
         return id;
     }
+
+    public AccionEntity generateOne() {
+        if (oIncidenciaRepository.count() > 0) {
+            AccionEntity oAccionEntity = new AccionEntity();
+            oAccionEntity.setFecha(RandomHelper.getRandomLocalDate());
+            oAccionEntity.setDescripcion(generateDescripcion());
+            oAccionEntity.setIncidencia(oIncidenciaService.getOneRandom());
+            return oAccionRepository.save(oAccionEntity);
+        } else {
+            return null;
+        }
+    }
+    public Long generateSome(int amount) {
+        oAuthService.OnlyAdmins();
+        if (oIncidenciaService.count() > 0) {
+            for (int i = 0; i < amount; i++) {
+                AccionEntity oAccionEntity = generateOne();
+                oAccionRepository.save(oAccionEntity);
+            }
+            return oAccionRepository.count();
+        } else {
+            throw new CannotPerformOperationException("no hay acciones en la base de datos");
+        }
+    }
+    
+    private String generateDescripcion() {
+        return DESCRIPCIONES[RandomHelper.getRandomInt(0, DESCRIPCIONES.length - 1)].toLowerCase();
+    }
+
     
 }

@@ -1,10 +1,11 @@
 package com.casamarruecos.CasaMarruecos.service;
 
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,6 @@ import com.casamarruecos.CasaMarruecos.exception.ResourceNotFoundException;
 import com.casamarruecos.CasaMarruecos.helper.RandomHelper;
 import com.casamarruecos.CasaMarruecos.helper.ValidationHelper;
 import com.casamarruecos.CasaMarruecos.repository.IncidenciaRepository;
-import com.casamarruecos.CasaMarruecos.repository.UsuarioRepository;
 
 @Service
 public class IncidenciaService {
@@ -32,8 +32,6 @@ public class IncidenciaService {
     @Autowired
     UsuarioService oUsuarioService;
 
-    @Autowired
-    UsuarioRepository oUsuarioRepository;
 
     private final String [] LUGARES = {"Valencia", "Madrid", "Murcia","Barcelona","Sevilla","Melilla","Alicante","Tarragona"};
     private final String [] DESCRIPCIONES = {"agresión a hombre marroqui", "cantos racistas a unos vecinos", "acto vandalico a mesquita","amenazas en la calle"};
@@ -128,11 +126,23 @@ public class IncidenciaService {
         return id;
     }
 
+    public IncidenciaEntity getOneRandom() {
+        if (count() > 0) {
+            IncidenciaEntity oIncidenciaEntity = null;
+            int iPosicion = RandomHelper.getRandomInt(0, (int) oIncidenciaRepository.count() - 1);
+            Pageable oPageable = PageRequest.of(iPosicion, 1);
+            Page<IncidenciaEntity> incidenciaPage = oIncidenciaRepository.findAll(oPageable);
+            List<IncidenciaEntity> incidenciaList = incidenciaPage.getContent();
+            oIncidenciaEntity = oIncidenciaRepository.getById(incidenciaList.get(0).getId());
+            return oIncidenciaEntity;
+        } else {
+            throw new CannotPerformOperationException("ho hay incidencias en la base de datos");
+        }
+    }
+
     public IncidenciaEntity generateOne() {
-        if (oUsuarioRepository.count() > 0) {
-            LocalDateTime fechaRand = RandomHelper.getRadomDate2();
+        if (oIncidenciaRepository.count() > 0) {
             IncidenciaEntity oIncidenciaEntity = new IncidenciaEntity();
-            oIncidenciaEntity.setFecha(fechaRand.toLocalDate());
             oIncidenciaEntity.setFecha(RandomHelper.getRandomLocalDate());
             oIncidenciaEntity.setDescripcion(generateDescripcion());
             oIncidenciaEntity.setLugar(generateLugar());
@@ -152,7 +162,7 @@ public class IncidenciaService {
             }
             return oIncidenciaRepository.count();
         } else {
-            throw new CannotPerformOperationException("no hay usuarios en la base de datos");
+            throw new CannotPerformOperationException("no hay incidencias en la base de datos");
         }
     }
     private String generateLugar() {

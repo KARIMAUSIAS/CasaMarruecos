@@ -60,7 +60,7 @@ public class AccionController {
     public ResponseEntity<Long> delete(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<Long>(oAccionService.delete(id), HttpStatus.OK);
     }
-/*
+
     @PostMapping("/generate")
     public ResponseEntity<AccionEntity> generate() {
         return new ResponseEntity<AccionEntity>(oAccionService.generateOne(), HttpStatus.OK);
@@ -69,5 +69,5 @@ public class AccionController {
     @PostMapping("/generate/{amount}")
     public ResponseEntity<Long> generateSome(@PathVariable(value = "amount") Integer amount) {
         return new ResponseEntity<>(oAccionService.generateSome(amount), HttpStatus.OK);
-    }*/
+    }
 }
