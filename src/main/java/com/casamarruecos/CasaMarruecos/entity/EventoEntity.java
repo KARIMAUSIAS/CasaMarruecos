@@ -1,6 +1,6 @@
 package com.casamarruecos.CasaMarruecos.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +23,10 @@ public class EventoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
     private String descripcion;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    private LocalDateTime fecha;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate fecha;
 
     @OneToMany(mappedBy = "evento", fetch = FetchType.LAZY)
     private final List<ParticipacionEntity> participaciones;
@@ -54,13 +53,6 @@ public class EventoEntity {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public String getDescripcion() {
         return descripcion;
@@ -70,11 +62,11 @@ public class EventoEntity {
         this.descripcion = descripcion;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

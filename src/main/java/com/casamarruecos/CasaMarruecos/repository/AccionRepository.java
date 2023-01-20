@@ -4,12 +4,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
+
 
 import com.casamarruecos.CasaMarruecos.entity.AccionEntity;
 
 
-@Repository
+
 public interface AccionRepository extends JpaRepository<AccionEntity, Long> {
 
     @Query(value = "SELECT * FROM accion WHERE id_incidencia = ?1", nativeQuery = true)
