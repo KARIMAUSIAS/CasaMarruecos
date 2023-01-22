@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 10-01-2023 a las 17:25:23
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 8.1.10
+-- Tiempo de generación: 22-01-2023 a las 13:31:44
+-- Versión del servidor: 8.0.23
+-- Versión de PHP: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,11 +28,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `accion` (
-  `id` bigint(20) NOT NULL,
-  `descripcion` varchar(400) COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint NOT NULL,
+  `descripcion` varchar(400) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `fecha` date NOT NULL,
-  `id_incidencia` bigint(20) NOT NULL
+  `id_incidencia` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `accion`
+--
+
+INSERT INTO `accion` (`id`, `descripcion`, `fecha`, `id_incidencia`) VALUES
+(1, 'manifestacion', '2011-05-28', 3),
+(2, 'denuncia judicial', '2012-03-29', 2),
+(3, 'manifestacion', '2012-06-24', 2);
 
 -- --------------------------------------------------------
 
@@ -41,11 +50,19 @@ CREATE TABLE `accion` (
 --
 
 CREATE TABLE `evento` (
-  `id` bigint(20) NOT NULL,
-  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `descripcion` varchar(400) COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint NOT NULL,
+  `descripcion` varchar(400) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `evento`
+--
+
+INSERT INTO `evento` (`id`, `descripcion`, `fecha`) VALUES
+(1, 'manifestacion', '2011-10-26 00:00:00'),
+(2, 'festividad', '2022-06-24 00:00:00'),
+(3, 'festividad', '2021-11-19 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -54,11 +71,11 @@ CREATE TABLE `evento` (
 --
 
 CREATE TABLE `incidencia` (
-  `id` bigint(20) NOT NULL,
-  `lugar` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint NOT NULL,
+  `lugar` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `fecha` date NOT NULL,
-  `descripcion` varchar(400) COLLATE utf8_unicode_ci NOT NULL,
-  `id_usuario` bigint(20) NOT NULL
+  `descripcion` varchar(400) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `id_usuario` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -78,9 +95,9 @@ INSERT INTO `incidencia` (`id`, `lugar`, `fecha`, `descripcion`, `id_usuario`) V
 --
 
 CREATE TABLE `multimedia` (
-  `id` bigint(20) NOT NULL,
-  `archivo` blob NOT NULL,
-  `id_evento` int(11) NOT NULL
+  `id` bigint NOT NULL,
+  `archivo` bigint NOT NULL DEFAULT '1',
+  `id_evento` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -90,9 +107,9 @@ CREATE TABLE `multimedia` (
 --
 
 CREATE TABLE `participacion` (
-  `id` bigint(20) NOT NULL,
-  `id_usuario` bigint(20) NOT NULL,
-  `id_evento` bigint(20) NOT NULL
+  `id` bigint NOT NULL,
+  `id_usuario` bigint NOT NULL,
+  `id_evento` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -102,8 +119,8 @@ CREATE TABLE `participacion` (
 --
 
 CREATE TABLE `tipousuario` (
-  `id` bigint(20) NOT NULL,
-  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `id` bigint NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -123,26 +140,26 @@ INSERT INTO `tipousuario` (`id`, `nombre`) VALUES
 --
 
 CREATE TABLE `usuario` (
-  `id` bigint(20) NOT NULL,
-  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `apellido1` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `apellido2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `id_tipousuario` bigint(20) NOT NULL,
-  `usuario` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `contraseña` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `localidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `domicilio` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `telefono` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dni` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` bigint NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `apellido1` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `apellido2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `id_tipousuario` bigint NOT NULL,
+  `usuario` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `contraseña` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `localidad` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `domicilio` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telefono` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dni` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `fechaNacimiento` date DEFAULT NULL,
   `camara` tinyint(1) DEFAULT NULL,
   `carnetConducir` tinyint(1) DEFAULT NULL,
   `coche` tinyint(1) DEFAULT NULL,
   `accesoInternet` tinyint(1) DEFAULT NULL,
   `facebook` tinyint(1) DEFAULT NULL,
-  `telefonoFijo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ocupacionActual` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `telefonoFijo` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ocupacionActual` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -215,37 +232,37 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `accion`
 --
 ALTER TABLE `accion`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `evento`
 --
 ALTER TABLE `evento`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `incidencia`
 --
 ALTER TABLE `incidencia`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `multimedia`
 --
 ALTER TABLE `multimedia`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `participacion`
 --
 ALTER TABLE `participacion`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

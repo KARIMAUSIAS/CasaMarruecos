@@ -1,12 +1,16 @@
 package com.casamarruecos.CasaMarruecos.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.casamarruecos.CasaMarruecos.entity.EventoEntity;
+import com.casamarruecos.CasaMarruecos.exception.CannotPerformOperationException;
 import com.casamarruecos.CasaMarruecos.exception.ResourceNotFoundException;
 import com.casamarruecos.CasaMarruecos.exception.ResourceNotModifiedException;
 import com.casamarruecos.CasaMarruecos.helper.RandomHelper;
@@ -103,6 +107,20 @@ public class EventoService {
     
     private String generateDescripcion() {
         return DESCRIPCIONES[RandomHelper.getRandomInt(0, DESCRIPCIONES.length - 1)].toLowerCase();
+    }
+
+    public EventoEntity getOneRandom() {
+        if (count() > 0) {
+            EventoEntity oEventoEntity = null;
+            int iPosicion = RandomHelper.getRandomInt(0, (int) oEventoRepository.count() - 1);
+            Pageable oPageable = PageRequest.of(iPosicion, 1);
+            Page<EventoEntity> EventoPage = oEventoRepository.findAll(oPageable);
+            List<EventoEntity> EventoList = EventoPage.getContent();
+            oEventoEntity = oEventoRepository.getById(EventoList.get(0).getId());
+            return oEventoEntity;
+        } else {
+            throw new CannotPerformOperationException("ho hay eventos en la base de datos");
+        }
     }
 
     
