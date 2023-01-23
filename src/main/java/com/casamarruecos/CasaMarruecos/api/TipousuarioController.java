@@ -38,6 +38,11 @@ public class TipousuarioController {
          return new ResponseEntity<Long>(oTipousuarioService.count(), HttpStatus.OK);
      }
 
+     @PostMapping("/")
+    public ResponseEntity<Long> create(@RequestBody TipousuarioEntity oNewUsuarioEntity) {
+        return new ResponseEntity<Long>(oTipousuarioService.create(oNewUsuarioEntity), HttpStatus.OK);
+    }
+
     @GetMapping("")
     public ResponseEntity<Page<TipousuarioEntity>> getPage(
             @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
