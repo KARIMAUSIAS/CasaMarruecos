@@ -19,7 +19,7 @@ public class MultimediaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long archivo;
+    private String archivo;
 
     
     @ManyToOne(fetch = FetchType.EAGER)
@@ -34,11 +34,11 @@ public class MultimediaEntity {
         this.id = id;
     }
 
-    public Long getArchivo() {
+    public String getArchivo() {
         return archivo;
     }
 
-    public void setArchivo(Long archivo) {
+    public void setArchivo(String archivo) {
         this.archivo = archivo;
     }
 

@@ -14,16 +14,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.casamarruecos.CasaMarruecos.entity.MultimediaEntity;
-import com.casamarruecos.CasaMarruecos.service.Multimedia;
+import com.casamarruecos.CasaMarruecos.service.MultimediaService;
 
+@RestController
+@RequestMapping("/multimedia")
 public class MultimediaController {
     
 
     @Autowired
-    Multimedia oMultimediaService;
+    MultimediaService oMultimediaService;
 
     @GetMapping("/{id}")
     public ResponseEntity<MultimediaEntity> get(@PathVariable(value = "id") Long id) {

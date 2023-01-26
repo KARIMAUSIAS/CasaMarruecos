@@ -14,7 +14,7 @@ import com.casamarruecos.CasaMarruecos.repository.EventoRepository;
 import com.casamarruecos.CasaMarruecos.repository.MultimediaRepository;
 
 @Service
-public class Multimedia {
+public class MultimediaService {
     
     @Autowired
     AuthService oAuthService;
@@ -84,7 +84,7 @@ public class Multimedia {
         if (oEventoRepository.count() > 0) {
             MultimediaEntity oMultimediaEntity = new MultimediaEntity();
             oMultimediaEntity.setEvento(oEventoService.getOneRandom());
-            oMultimediaEntity.setArchivo(1L);
+            oMultimediaEntity.setArchivo("https://getuikit.com/v2/docs/images/placeholder_600x400.svg");
             return oMultimediaRepository.save(oMultimediaEntity);
         } else {
             return null;
