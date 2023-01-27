@@ -120,13 +120,18 @@ public class AccionService {
         return id;
     }
 
+    public AccionEntity generate() {
+        oAuthService.OnlyAdmins();
+        return oAccionRepository.save(generateOne());
+    }
+
     public AccionEntity generateOne() {
         if (oIncidenciaRepository.count() > 0) {
             AccionEntity oAccionEntity = new AccionEntity();
             oAccionEntity.setFecha(RandomHelper.getRandomLocalDate());
             oAccionEntity.setDescripcion(generateDescripcion());
             oAccionEntity.setIncidencia(oIncidenciaService.getOneRandom());
-            return oAccionRepository.save(oAccionEntity);
+            return oAccionEntity;
         } else {
             return null;
         }

@@ -61,8 +61,8 @@ public class EventoController {
     }
 
     @PostMapping("/generate")
-    public ResponseEntity<EventoEntity> generateOne() {
-        return new ResponseEntity<EventoEntity>(oEventoService.generateOne(), HttpStatus.OK);
+    public ResponseEntity<EventoEntity> generate() {
+        return new ResponseEntity<EventoEntity>(oEventoService.generate(), HttpStatus.OK);
     }
 
     @PostMapping("/generate/{amount}")

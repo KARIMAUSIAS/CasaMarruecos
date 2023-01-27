@@ -172,7 +172,7 @@ public class UsuarioService {
             oUsuarioEntity = oUsuarioRepository.getById(usuarioList.get(0).getId());
             return oUsuarioEntity;
         } else {
-            throw new CannotPerformOperationException("ho hay usuarios en la base de datos");
+            throw new CannotPerformOperationException("No hay usuarios en la base de datos");
         }
     }
 

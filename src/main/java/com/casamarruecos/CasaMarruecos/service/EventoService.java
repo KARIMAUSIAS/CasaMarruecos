@@ -49,6 +49,7 @@ public class EventoService {
     }
 
     public Page<EventoEntity> getPage(Pageable oPageable, String strFilter) {
+        oAuthService.OnlyAdmins();
         ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<EventoEntity> oPage = null;
         if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {
@@ -67,6 +68,7 @@ public class EventoService {
 
     @Transactional
     public Long update(EventoEntity oUpdateEventoEntity) {
+        oAuthService.OnlyAdmins();
         EventoEntity oEventoEntity = oEventoRepository.findById(oUpdateEventoEntity.getId()).get();
         oAuthService.OnlyAdmins();
         validate(oEventoEntity.getId());
@@ -89,11 +91,16 @@ public class EventoService {
         }
     }
 
+    public EventoEntity generate() {
+        oAuthService.OnlyAdmins();
+        return oEventoRepository.save(generateOne());
+    }
+
     public EventoEntity generateOne() {
             EventoEntity oEventoEntity = new EventoEntity();
             oEventoEntity.setFecha(RandomHelper.getRandomLocalDate());
             oEventoEntity.setDescripcion(generateDescripcion());
-            return oEventoRepository.save(oEventoEntity);
+            return oEventoEntity;
         }
 
     public Long generateSome(int amount) {

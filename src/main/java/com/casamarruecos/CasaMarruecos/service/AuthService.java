@@ -1,7 +1,6 @@
 package com.casamarruecos.CasaMarruecos.service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +15,6 @@ import com.casamarruecos.CasaMarruecos.repository.UsuarioRepository;
 
 @Service
 public class AuthService {
-    @Autowired
-    private HttpSession oHttpSession;
 
     @Autowired
     private HttpServletRequest oRequest;
@@ -51,7 +48,7 @@ public class AuthService {
     }
 
     public boolean isAdmin() {
-        UsuarioEntity oUsuarioSessionEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
+        UsuarioEntity oUsuarioSessionEntity = oUsuarioRepository.findByUsuario((String) oRequest.getAttribute("usuario"));
         if (oUsuarioSessionEntity != null) {
             if (oUsuarioSessionEntity.getTipousuario().getId().equals(TipoUsuarioHelper.ADMIN)) {
                 return true;
@@ -72,7 +69,7 @@ public class AuthService {
     }
 
     public boolean isLoggedIn() {
-        UsuarioEntity oUsuarioSessionEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
+        UsuarioEntity oUsuarioSessionEntity = (UsuarioEntity) oRequest.getAttribute("usuario");
         if (oUsuarioSessionEntity == null) {
             return false;
         } else {
@@ -87,18 +84,27 @@ public class AuthService {
             if (oUsuarioSessionEntity.getTipousuario().getId().equals(TipoUsuarioHelper.ADMIN)) {
                 
             }else if (!oUsuarioSessionEntity.getId().equals(id)) {
-                    throw new UnauthorizedException("this request is only allowed for your own data");
-                }
+                throw new UnauthorizedException("this request is only allowed for your own data");
+            }
         }
     }
 
     
     public Long getUserID() {
-        UsuarioEntity oUsuarioSessionEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
+        UsuarioEntity oUsuarioSessionEntity = oUsuarioRepository.findByUsuario((String) oRequest.getAttribute("usuario"));
         if (oUsuarioSessionEntity != null) {
             return oUsuarioSessionEntity.getId();
         } else {
             throw new UnauthorizedException("this request is only allowed to auth users");
+        }
+    }
+
+    public void OnlyAdminsOrUsers() {
+        UsuarioEntity oUsuarioSessionEntity = oUsuarioRepository.findByUsuario((String) oRequest.getAttribute("usuario"));
+        if (oUsuarioSessionEntity == null) {
+            throw new UnauthorizedException("this request is only allowed to user or admin role");
+        } else {
+
         }
     }
 }

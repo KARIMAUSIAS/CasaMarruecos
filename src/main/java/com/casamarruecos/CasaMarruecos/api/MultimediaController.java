@@ -63,7 +63,7 @@ public class MultimediaController {
 
     @PostMapping("/generate")
     public ResponseEntity<MultimediaEntity> generate() {
-        return new ResponseEntity<MultimediaEntity>(oMultimediaService.generateOne(), HttpStatus.OK);
+        return new ResponseEntity<MultimediaEntity>(oMultimediaService.generate(), HttpStatus.OK);
     }
 
     @PostMapping("/generate/{amount}")

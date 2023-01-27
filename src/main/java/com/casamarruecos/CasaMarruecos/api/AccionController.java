@@ -63,7 +63,7 @@ public class AccionController {
 
     @PostMapping("/generate")
     public ResponseEntity<AccionEntity> generate() {
-        return new ResponseEntity<AccionEntity>(oAccionService.generateOne(), HttpStatus.OK);
+        return new ResponseEntity<AccionEntity>(oAccionService.generate(), HttpStatus.OK);
     }
 
     @PostMapping("/generate/{amount}")

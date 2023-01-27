@@ -46,6 +46,7 @@ public class MultimediaService {
     }
 
     public Page<MultimediaEntity> getPage(Pageable oPageable, Long lEvento) {
+        oAuthService.OnlyAdmins();
         ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<MultimediaEntity> oPage = null;
             if (lEvento != null) {
@@ -64,6 +65,7 @@ public class MultimediaService {
 
     @Transactional
     public Long update(MultimediaEntity oUpdateMultimediaEntity) {
+        oAuthService.OnlyAdmins();
         MultimediaEntity oMultimediaEntity = oMultimediaRepository.findById(oUpdateMultimediaEntity.getId()).get();
         oAuthService.OnlyAdmins();
         validate(oMultimediaEntity.getId());
@@ -80,12 +82,17 @@ public class MultimediaService {
         return id;
     }
 
+    public MultimediaEntity generate() {
+        oAuthService.OnlyAdmins();
+        return oMultimediaRepository.save(generateOne());
+    }
+
     public MultimediaEntity generateOne() {
         if (oEventoRepository.count() > 0) {
             MultimediaEntity oMultimediaEntity = new MultimediaEntity();
             oMultimediaEntity.setEvento(oEventoService.getOneRandom());
             oMultimediaEntity.setArchivo("https://getuikit.com/v2/docs/images/placeholder_600x400.svg");
-            return oMultimediaRepository.save(oMultimediaEntity);
+            return oMultimediaEntity;
         } else {
             return null;
         }

@@ -140,6 +140,11 @@ public class IncidenciaService {
         }
     }
 
+    public IncidenciaEntity generate() {
+        oAuthService.OnlyAdmins();
+        return oIncidenciaRepository.save(generateOne());
+    }
+
     public IncidenciaEntity generateOne() {
         if (oIncidenciaRepository.count() > 0) {
             IncidenciaEntity oIncidenciaEntity = new IncidenciaEntity();
@@ -147,7 +152,7 @@ public class IncidenciaService {
             oIncidenciaEntity.setDescripcion(generateDescripcion());
             oIncidenciaEntity.setLugar(generateLugar());
             oIncidenciaEntity.setUsuario(oUsuarioService.getOneRandom());
-            return oIncidenciaRepository.save(oIncidenciaEntity);
+            return oIncidenciaEntity;
         } else {
             return null;
         }

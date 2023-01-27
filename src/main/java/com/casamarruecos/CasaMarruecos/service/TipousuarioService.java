@@ -55,6 +55,7 @@ public class TipousuarioService {
     }
 
     public Page<TipousuarioEntity> getPage(Pageable oPageable, String strFilter) {
+        oAuthService.OnlyAdmins();
         ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<TipousuarioEntity> oPage = null;
         if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {
