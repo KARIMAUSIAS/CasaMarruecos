@@ -26,7 +26,7 @@ public class AuthService {
         if (oUsuarioBean.getContraseña() != null) {
             UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByUsuarioAndContraseña(oUsuarioBean.getUsuario(), oUsuarioBean.getContraseña());
             if (oUsuarioEntity != null) {
-                return JwtHelper.generateJWT(oUsuarioBean.getUsuario());
+                return JwtHelper.generateJWT(oUsuarioBean.getUsuario(), oUsuarioEntity.getTipousuario().getId());
             } else {
                 throw new UnauthorizedException("usuario or contraseña incorrect");
             }
