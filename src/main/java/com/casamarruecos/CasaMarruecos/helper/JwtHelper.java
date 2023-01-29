@@ -17,12 +17,13 @@ public class JwtHelper {
 
     private static final String SECRET = "CASAmarruecos2022casaMARRUECOS2023";
     private static final String ISSUER = "CASAMARRUECOS";
+    private static final String USERTYPE = "tipousuario";
 
     private static SecretKey secretKey() {
         return Keys.hmacShaKeyFor((SECRET + ISSUER + SECRET).getBytes());
     }
 
-    public static String generateJWT(String name) {
+    public static String generateJWT(String name, long tipousuario) {
 
         Date currentTime = Date.from(Instant.now());
         Date expiryTime = Date.from(Instant.now().plus(Duration.ofSeconds(9600)));
@@ -33,6 +34,7 @@ public class JwtHelper {
                .setIssuedAt(currentTime)
                .setExpiration(expiryTime)
                .claim("name", name)
+               .claim(USERTYPE,tipousuario)
                .signWith(secretKey())
                .compact();
     }
