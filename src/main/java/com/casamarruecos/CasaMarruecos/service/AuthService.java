@@ -31,7 +31,7 @@ public class AuthService {
                 throw new UnauthorizedException("usuario or contraseña incorrect");
             }
         } else {
-            throw new UnauthorizedException("wrong Contraseña");
+            throw new UnauthorizedException("wrong contraseña");
         }
     }
 

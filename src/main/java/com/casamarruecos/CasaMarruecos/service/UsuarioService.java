@@ -181,7 +181,7 @@ public class UsuarioService {
         oUserEntity.setNombre(names.get(RandomHelper.getRandomInt(0, names.size() - 1)));
         oUserEntity.setApellido1(surnames.get(RandomHelper.getRandomInt(0, names.size() - 1)));
         oUserEntity.setApellido2(lastnames.get(RandomHelper.getRandomInt(0, lastnames.size() - 1)));
-        oUserEntity.setUsuario(oUserEntity.getNombre() + "_" + oUserEntity.getApellido1());
+        oUserEntity.setUsuario(oUserEntity.getNombre().toLowerCase().substring(0, 1) + oUserEntity.getApellido1().toLowerCase().substring(0, 1));
         oUserEntity.setContraseña(CASAMARRUECOS_DEFAULT_PASSWORD);
         oUserEntity.setEmail(generateEmail(oUserEntity.getNombre().toLowerCase(), oUserEntity.getApellido1().toLowerCase()));
         if (RandomHelper.getRandomInt(0, 10) > 1) {
@@ -191,13 +191,6 @@ public class UsuarioService {
         }
         return oUserEntity;
     }
-
-    /* private String generateDNI() {
-        String dni = "";
-        int dniNumber = RandomHelper.getRandomInt(11111111, 99999999 + 1);
-        dni += dniNumber + "" + DNI_LETTERS.charAt(dniNumber % 23);
-        return dni;
-     }*/
 
     private String generateEmail(String name, String surname) {
         List<String> list = new ArrayList<>();
