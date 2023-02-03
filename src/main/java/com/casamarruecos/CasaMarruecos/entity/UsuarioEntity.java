@@ -23,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UsuarioEntity implements Serializable {
 
-    /*Atributos comunes */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,29 +41,6 @@ public class UsuarioEntity implements Serializable {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String contraseña;
-
-    //Atributos comunes entre socios y voluntarios
-
-    /*private String localidad;
-    private String domicilio;
-    private String telefono;
-    private String dni;
-
-    //Atributos de voluntarios
-    private LocalDate fechaNacimiento;
-    private boolean camara;
-    private boolean carnetConducir;
-    private boolean coche;
-    private boolean accesoInternet;
-    private boolean facebook;
-    private String telefonoFijo;
-    private String ocupacionActual;
-    
-    private List<String> estudios;
-    private List<String> idiomas;
-    private List<String> hobbies
-    */
-
     
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private final List<ParticipacionEntity> participaciones;
@@ -141,102 +117,6 @@ public class UsuarioEntity implements Serializable {
     public void setTipousuario(TipousuarioEntity tipousuario) {
         this.tipousuario = tipousuario;
     }
-/*
-    public String getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
-    }
-
-    public String getDomicilio() {
-        return domicilio;
-    }
-
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-    
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public boolean isCamara() {
-        return camara;
-    }
-
-    public void setCamara(boolean camara) {
-        this.camara = camara;
-    }
-
-    public boolean isCarnetConducir() {
-        return carnetConducir;
-    }
-
-    public void setCarnetConducir(boolean carnetConducir) {
-        this.carnetConducir = carnetConducir;
-    }
-
-    public boolean isCoche() {
-        return coche;
-    }
-
-    public void setCoche(boolean coche) {
-        this.coche = coche;
-    }
-
-    public boolean isAccesoInternet() {
-        return accesoInternet;
-    }
-
-    public void setAccesoInternet(boolean accesoInternet) {
-        this.accesoInternet = accesoInternet;
-    }
-
-    public boolean isFacebook() {
-        return facebook;
-    }
-
-    public void setFacebook(boolean facebook) {
-        this.facebook = facebook;
-    }
-
-    public String getTelefonoFijo() {
-        return telefonoFijo;
-    }
-
-    public void setTelefonoFijo(String telefonoFijo) {
-        this.telefonoFijo = telefonoFijo;
-    }
-
-    public String getOcupacionActual() {
-        return ocupacionActual;
-    }
-
-    public void setOcupacionActual(String ocupacionActual) {
-        this.ocupacionActual = ocupacionActual;
-    }*/
 
     public int getParticipaciones() {
         return participaciones.size();
