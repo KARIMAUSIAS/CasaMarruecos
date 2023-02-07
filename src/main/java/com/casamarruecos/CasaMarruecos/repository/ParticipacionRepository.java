@@ -14,4 +14,6 @@ public interface ParticipacionRepository extends JpaRepository<ParticipacionEnti
 
     Page<ParticipacionEntity> findByUsuarioId(Long id_usuario ,Pageable oPageable);
 
+    boolean existsByUsuarioIdAndEventoId(Long id_usuario, Long id_evento);
+
 }

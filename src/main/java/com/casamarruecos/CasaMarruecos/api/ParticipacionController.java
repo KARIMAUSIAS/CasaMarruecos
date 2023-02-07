@@ -33,6 +33,8 @@ public class ParticipacionController {
         return new ResponseEntity<Page<ParticipacionEntity>>(oParticipacionService.getPage(oPageable, lUsuario, lEvento), HttpStatus.OK);
     }
 
+    
+
     @PostMapping("/generate")
     public ResponseEntity<ParticipacionEntity> generate() {
         return new ResponseEntity<ParticipacionEntity>(oParticipacionService.generate(), HttpStatus.OK);

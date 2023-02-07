@@ -49,7 +49,7 @@ public class EventoService {
     }
 
     public Page<EventoEntity> getPage(Pageable oPageable, String strFilter) {
-        oAuthService.OnlyAdmins();
+        //oAuthService.OnlyAdmins();
         ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<EventoEntity> oPage = null;
         if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {

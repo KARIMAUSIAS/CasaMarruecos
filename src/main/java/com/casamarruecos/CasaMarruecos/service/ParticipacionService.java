@@ -52,6 +52,15 @@ public class ParticipacionService {
         return oPage;
     }
 
+    public Long create(ParticipacionEntity oNewParticipacionEntity) {
+        if(!oParticipacionRepository.existsByUsuarioIdAndEventoId(oNewParticipacionEntity.getUsuario().getId(), oNewParticipacionEntity.getEvento().getId())){
+        oNewParticipacionEntity.setId(0L);
+        return oParticipacionRepository.save(oNewParticipacionEntity).getId();
+        }else{
+            return null;
+        }
+    }
+
     public ParticipacionEntity generate() {
         oAuthService.OnlyAdmins();
         return oParticipacionRepository.save(generateOne());
