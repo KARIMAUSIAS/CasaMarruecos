@@ -52,8 +52,13 @@ public class ParticipacionService {
         return oPage;
     }
 
+    public boolean validarCreacion(ParticipacionEntity oParticipacionEntity){
+        return oParticipacionRepository.existsByUsuarioIdAndEventoId(oParticipacionEntity.getUsuario().getId(), oParticipacionEntity.getEvento().getId());
+
+    }
+
     public Long create(ParticipacionEntity oNewParticipacionEntity) {
-        if(!oParticipacionRepository.existsByUsuarioIdAndEventoId(oNewParticipacionEntity.getUsuario().getId(), oNewParticipacionEntity.getEvento().getId())){
+        if(!validarCreacion(oNewParticipacionEntity)){
         oNewParticipacionEntity.setId(0L);
         return oParticipacionRepository.save(oNewParticipacionEntity).getId();
         }else{

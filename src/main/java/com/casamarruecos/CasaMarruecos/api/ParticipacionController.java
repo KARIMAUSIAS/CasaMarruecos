@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,8 +34,10 @@ public class ParticipacionController {
         return new ResponseEntity<Page<ParticipacionEntity>>(oParticipacionService.getPage(oPageable, lUsuario, lEvento), HttpStatus.OK);
     }
 
-    
-
+    @PostMapping("/")
+    public ResponseEntity<Long> create(@RequestBody ParticipacionEntity oNewParticipacionEntity) {
+        return new ResponseEntity<Long>(oParticipacionService.create(oNewParticipacionEntity), HttpStatus.OK);
+    }
     @PostMapping("/generate")
     public ResponseEntity<ParticipacionEntity> generate() {
         return new ResponseEntity<ParticipacionEntity>(oParticipacionService.generate(), HttpStatus.OK);
@@ -44,5 +47,13 @@ public class ParticipacionController {
     public ResponseEntity<Long> generateSome(@PathVariable(value = "amount") Integer amount) {
         return new ResponseEntity<>(oParticipacionService.generateSome(amount), HttpStatus.OK);
     }
+        /* public ResponseEntity<boolean> validar(@RequestBody ParticipacionEntity oParticipacion) {
+            return new ResponseEntity<boolean>(oParticipacionService.validarCreacion(oParticipacion), HttpStatus.OK);
+        } */
+
+    @PostMapping("/validar")
+    public ResponseEntity<Boolean> validate(@RequestBody ParticipacionEntity oNewParticipacionEntity) {
+            return new ResponseEntity<Boolean>(oParticipacionService.validarCreacion(oNewParticipacionEntity), HttpStatus.OK);
+        }
     
 }
