@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,9 +52,18 @@ public class ParticipacionController {
             return new ResponseEntity<boolean>(oParticipacionService.validarCreacion(oParticipacion), HttpStatus.OK);
         } */
 
-    @PostMapping("/validar")
-    public ResponseEntity<Boolean> validate(@RequestBody ParticipacionEntity oNewParticipacionEntity) {
-            return new ResponseEntity<Boolean>(oParticipacionService.validarCreacion(oNewParticipacionEntity), HttpStatus.OK);
+    @GetMapping("/validar")
+    public ResponseEntity<Boolean> validate(
+        @RequestParam(name = "usuario", required = false) Long lUsuario,
+        @RequestParam(name = "evento", required = false) Long lEvento) {
+            return new ResponseEntity<Boolean>(oParticipacionService.validarCreacion( lUsuario, lEvento), HttpStatus.OK);
         }
+
+    @DeleteMapping("")
+    public ResponseEntity<Long> borrar(
+        @RequestParam(name = "usuario", required = false) Long lUsuario,
+        @RequestParam(name = "evento", required = false) Long lEvento) {
+        return new ResponseEntity<Long>(oParticipacionService.borrarParticipacion( lUsuario, lEvento), HttpStatus.OK);
+    }
     
 }
