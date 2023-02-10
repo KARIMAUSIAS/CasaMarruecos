@@ -1,7 +1,5 @@
 package com.casamarruecos.CasaMarruecos.service;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -54,23 +52,26 @@ public class ParticipacionService {
         return oPage;
     }
 
-    public boolean validarCreacion(Long id_usuario, Long id_evento){
-        ParticipacionEntity oParticipacionEntity = new ParticipacionEntity();
-        oParticipacionEntity.setEvento(oEventoRepository.getById(id_evento));
-        oParticipacionEntity.setUsuario(oUsuarioRepository.getById(id_usuario));
-        return oParticipacionRepository.existsByUsuarioIdAndEventoId(oParticipacionEntity.getUsuario().getId(), oParticipacionEntity.getEvento().getId());
+    public boolean validarParticipacion(Long id_usuario, Long id_evento){
+        if(oParticipacionRepository.existsByUsuarioIdAndEventoId(id_usuario, id_evento)){
+            return true;
+        } else{
+        return false;
     }
+}
 
     public Long borrarParticipacion(Long id_usuario, Long id_evento){
-        ArrayList<Long> oParticipacionesEntity = oParticipacionRepository.findByEventoIdAndUsuarioId(id_evento, id_usuario);
-        for (int i = 0; i < oParticipacionesEntity.size(); i++) {
-        oParticipacionRepository.deleteById(oParticipacionesEntity.get(i));
-        }
-        return oParticipacionesEntity.get(0);
+        if(validarParticipacion(id_usuario, id_evento)){
+        ParticipacionEntity oParticipacionEntity = oParticipacionRepository.findByEventoIdAndUsuarioId(id_evento, id_usuario);
+        oParticipacionRepository.deleteById(oParticipacionEntity.getId());
+        return oParticipacionEntity.getId(); 
+    }else{
+        return null;
     }
+}
 
     public Long create(ParticipacionEntity oNewParticipacionEntity) {
-        if(!validarCreacion(oNewParticipacionEntity.getUsuario().getId(), oNewParticipacionEntity.getEvento().getId())){
+        if(!validarParticipacion(oNewParticipacionEntity.getUsuario().getId(), oNewParticipacionEntity.getEvento().getId())){
         oNewParticipacionEntity.setId(0L);
         return oParticipacionRepository.save(oNewParticipacionEntity).getId();
         }else{
@@ -86,9 +87,11 @@ public class ParticipacionService {
     public ParticipacionEntity generateOne() {
         if (oEventoRepository.count() > 0 && oUsuarioRepository.count() > 0) {
             ParticipacionEntity oParticipacionEntity = new ParticipacionEntity();
+            do{
             oParticipacionEntity.setEvento(oEventoService.getOneRandom());
             oParticipacionEntity.setUsuario(oUsuarioService.getOneRandom());
-            return oParticipacionRepository.save(oParticipacionEntity);
+        }while(validarParticipacion(oParticipacionEntity.getUsuario().getId(), oParticipacionEntity.getEvento().getId()));
+        return oParticipacionRepository.save(oParticipacionEntity);
         } else {
             return null;
         }

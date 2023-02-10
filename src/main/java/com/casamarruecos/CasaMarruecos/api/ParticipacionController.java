@@ -39,6 +39,13 @@ public class ParticipacionController {
     public ResponseEntity<Long> create(@RequestBody ParticipacionEntity oNewParticipacionEntity) {
         return new ResponseEntity<Long>(oParticipacionService.create(oNewParticipacionEntity), HttpStatus.OK);
     }
+
+    @DeleteMapping("")
+    public ResponseEntity<Long> borrar(
+        @RequestParam(name = "usuario", required = false) Long lUsuario,
+        @RequestParam(name = "evento", required = false) Long lEvento) {
+        return new ResponseEntity<Long>(oParticipacionService.borrarParticipacion( lUsuario, lEvento), HttpStatus.OK);
+    }
     @PostMapping("/generate")
     public ResponseEntity<ParticipacionEntity> generate() {
         return new ResponseEntity<ParticipacionEntity>(oParticipacionService.generate(), HttpStatus.OK);
@@ -56,14 +63,8 @@ public class ParticipacionController {
     public ResponseEntity<Boolean> validate(
         @RequestParam(name = "usuario", required = false) Long lUsuario,
         @RequestParam(name = "evento", required = false) Long lEvento) {
-            return new ResponseEntity<Boolean>(oParticipacionService.validarCreacion( lUsuario, lEvento), HttpStatus.OK);
+            return new ResponseEntity<Boolean>(oParticipacionService.validarParticipacion( lUsuario, lEvento), HttpStatus.OK);
         }
 
-    @DeleteMapping("")
-    public ResponseEntity<Long> borrar(
-        @RequestParam(name = "usuario", required = false) Long lUsuario,
-        @RequestParam(name = "evento", required = false) Long lEvento) {
-        return new ResponseEntity<Long>(oParticipacionService.borrarParticipacion( lUsuario, lEvento), HttpStatus.OK);
-    }
     
 }

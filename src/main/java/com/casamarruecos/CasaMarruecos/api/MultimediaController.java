@@ -1,5 +1,6 @@
 package com.casamarruecos.CasaMarruecos.api;
 
+
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,6 +34,12 @@ public class MultimediaController {
     public ResponseEntity<MultimediaEntity> get(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<MultimediaEntity>(oMultimediaService.get(id), HttpStatus.OK);
     }
+
+    @GetMapping("archivo/{id}")
+        public ResponseEntity<String> getArchivos(@PathVariable(value = "id") Long id) {
+            return new ResponseEntity<String>(oMultimediaService.getMultimedias(id), HttpStatus.OK);
+        }
+    
 
     @GetMapping("/count")
     public ResponseEntity<Long> count() {

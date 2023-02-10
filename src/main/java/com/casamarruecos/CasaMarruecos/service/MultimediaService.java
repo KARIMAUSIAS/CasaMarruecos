@@ -1,5 +1,6 @@
 package com.casamarruecos.CasaMarruecos.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -57,6 +58,11 @@ public class MultimediaService {
         return oPage;
     }
 
+    public String getMultimedias(Long id_evento){
+
+        return oMultimediaRepository.findByEventoId(id_evento);
+    }
+
     public Long create(MultimediaEntity oNewMultimediaEntity) {
         oAuthService.OnlyAdmins();
         oNewMultimediaEntity.setId(0L);
@@ -92,6 +98,7 @@ public class MultimediaService {
             MultimediaEntity oMultimediaEntity = new MultimediaEntity();
             oMultimediaEntity.setEvento(oEventoService.getOneRandom());
             oMultimediaEntity.setArchivo("https://getuikit.com/v2/docs/images/placeholder_600x400.svg");
+            oMultimediaEntity.setRepresentativa(0);
             return oMultimediaEntity;
         } else {
             return null;
