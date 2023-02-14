@@ -21,7 +21,6 @@ public class MultimediaEntity {
 
     private String archivo;
 
-    private int representativa;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_evento")
@@ -49,19 +48,7 @@ public class MultimediaEntity {
 
     public void setEvento(EventoEntity evento) {
         this.evento = evento;
-    }
-
-    public int getRepresentativa() {
-        return representativa;
-    }
-
-    public void setRepresentativa(int representativa) {
-        this.representativa = representativa;
-    }
-
-    
-
-    
+    }    
     
 
 }

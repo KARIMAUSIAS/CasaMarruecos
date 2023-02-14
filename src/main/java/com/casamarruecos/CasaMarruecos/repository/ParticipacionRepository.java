@@ -1,6 +1,9 @@
 package com.casamarruecos.CasaMarruecos.repository;
 
 import org.springframework.data.jpa.repository.Query;
+
+import java.util.ArrayList;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,5 +22,8 @@ public interface ParticipacionRepository extends JpaRepository<ParticipacionEnti
     Page<ParticipacionEntity> findByUsuarioId(Long id_usuario ,Pageable oPageable);
 
     boolean existsByUsuarioIdAndEventoId(Long id_usuario, Long id_evento);
+
+    @Query(value = "SELECT id_evento FROM participacion WHERE id_usuario = ?1", nativeQuery = true)
+    ArrayList<Long> findUsuario(Long id_usuario);
 
 }

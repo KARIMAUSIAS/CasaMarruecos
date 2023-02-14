@@ -1,5 +1,7 @@
 package com.casamarruecos.CasaMarruecos.api;
 
+import java.util.ArrayList;
+
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -66,5 +68,9 @@ public class ParticipacionController {
             return new ResponseEntity<Boolean>(oParticipacionService.validarParticipacion( lUsuario, lEvento), HttpStatus.OK);
         }
 
+    @GetMapping("/eventos/{id_usuario}")
+    public ResponseEntity<ArrayList<Long>> listaEventos(@PathVariable(value = "id_usuario") Long id_usuario){
+        return new ResponseEntity<ArrayList<Long>>(oParticipacionService.listaEventos( id_usuario), HttpStatus.OK);
+    }
     
 }

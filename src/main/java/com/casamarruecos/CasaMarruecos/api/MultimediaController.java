@@ -34,11 +34,6 @@ public class MultimediaController {
     public ResponseEntity<MultimediaEntity> get(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<MultimediaEntity>(oMultimediaService.get(id), HttpStatus.OK);
     }
-
-    @GetMapping("archivo/{id}")
-        public ResponseEntity<String> getArchivos(@PathVariable(value = "id") Long id) {
-            return new ResponseEntity<String>(oMultimediaService.getMultimedias(id), HttpStatus.OK);
-        }
     
 
     @GetMapping("/count")

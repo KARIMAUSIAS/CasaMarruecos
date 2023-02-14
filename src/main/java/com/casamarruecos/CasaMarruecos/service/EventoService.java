@@ -55,7 +55,7 @@ public class EventoService {
         if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {
             oPage = oEventoRepository.findAll(oPageable);
         } else {
-            oPage = oEventoRepository.findByDescripcionIgnoreCaseContainingOrFechaIgnoreCaseContaining(strFilter, strFilter, oPageable);
+            oPage = oEventoRepository.findByDescripcionIgnoreCaseContaining(strFilter, oPageable);
         }
         return oPage;
     }
@@ -74,6 +74,7 @@ public class EventoService {
         validate(oEventoEntity.getId());
         oEventoEntity.setDescripcion(oUpdateEventoEntity.getDescripcion());
         oEventoEntity.setFecha(oUpdateEventoEntity.getFecha());
+        oEventoEntity.setImagen(oUpdateEventoEntity.getImagen());
         return oEventoRepository.save(oEventoEntity).getId();
     }
 
@@ -126,7 +127,7 @@ public class EventoService {
             oEventoEntity = oEventoRepository.getById(EventoList.get(0).getId());
             return oEventoEntity;
         } else {
-            throw new CannotPerformOperationException("ho hay eventos en la base de datos");
+            throw new CannotPerformOperationException("No hay eventos en la base de datos");
         }
     }
 

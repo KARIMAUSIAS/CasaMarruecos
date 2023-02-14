@@ -10,6 +10,6 @@ import com.casamarruecos.CasaMarruecos.entity.EventoEntity;
 
 public interface EventoRepository extends JpaRepository<EventoEntity, Long> {
 
-    Page<EventoEntity> findByDescripcionIgnoreCaseContainingOrFechaIgnoreCaseContaining(String descripcion, String fecha, Pageable oPageable);
+    Page<EventoEntity> findByDescripcionIgnoreCaseContaining(String descripcion, Pageable oPageable);
 
 }

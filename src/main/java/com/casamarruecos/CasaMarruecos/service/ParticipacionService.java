@@ -1,5 +1,7 @@
 package com.casamarruecos.CasaMarruecos.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -108,5 +110,10 @@ public class ParticipacionService {
         } else {
             throw new CannotPerformOperationException("No hay participaciones en la base de datos");
         }
+    }
+
+    public ArrayList<Long> listaEventos(Long id_usuario){
+        
+        return oParticipacionRepository.findUsuario(id_usuario);
     }
 }

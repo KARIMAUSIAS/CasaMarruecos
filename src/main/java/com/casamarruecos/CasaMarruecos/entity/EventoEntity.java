@@ -28,6 +28,8 @@ public class EventoEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate fecha;
 
+    private String imagen;
+
     @OneToMany(mappedBy = "evento", fetch = FetchType.LAZY)
     private final List<ParticipacionEntity> participaciones;
 
@@ -78,7 +80,15 @@ public class EventoEntity {
         return multimedias.size();
     }
 
+    public String getImagen() {
+        return imagen;
+    }
 
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    
     
 
     
