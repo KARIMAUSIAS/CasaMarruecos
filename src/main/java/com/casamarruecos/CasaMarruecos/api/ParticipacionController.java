@@ -72,5 +72,10 @@ public class ParticipacionController {
     public ResponseEntity<ArrayList<Long>> listaEventos(@PathVariable(value = "id_usuario") Long id_usuario){
         return new ResponseEntity<ArrayList<Long>>(oParticipacionService.listaEventos( id_usuario), HttpStatus.OK);
     }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> count() {
+        return new ResponseEntity<Long>(oParticipacionService.count(), HttpStatus.OK);
+    }
     
 }

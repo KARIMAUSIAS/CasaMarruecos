@@ -62,6 +62,11 @@ public class ParticipacionService {
     }
 }
 
+public Long count() {
+    oAuthService.OnlyAdmins();
+    return oParticipacionRepository.count();
+}
+
     public Long borrarParticipacion(Long id_usuario, Long id_evento){
         if(validarParticipacion(id_usuario, id_evento)){
         ParticipacionEntity oParticipacionEntity = oParticipacionRepository.findByEventoIdAndUsuarioId(id_evento, id_usuario);
