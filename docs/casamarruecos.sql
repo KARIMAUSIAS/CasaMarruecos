@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 15-02-2023 a las 00:03:20
+-- Tiempo de generación: 15-02-2023 a las 13:59:01
 -- Versión del servidor: 8.0.23
 -- Versión de PHP: 8.0.3
 
@@ -221,7 +221,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id`, `nombre`, `apellido1`, `apellido2`, `email`, `id_tipousuario`, `usuario`, `contraseña`) VALUES
 (1, 'Karim', 'Rezgaoui', 'Mourad', 'email@email.com', 1, 'kare', 'be59d545b4c6ee5c9f2da6bbf6ce667097a7e38bd75ade5dde564234fb891c88'),
 (2, 'Kevin', 'Blanco', 'Bañuls', 'email@email.com', 4, 'kebla', 'be59d545b4c6ee5c9f2da6bbf6ce667097a7e38bd75ade5dde564234fb891c88'),
-(3, 'Jose', 'Rosales', '', 'email@email.com', 2, 'jora', 'be59d545b4c6ee5c9f2da6bbf6ce667097a7e38bd75ade5dde564234fb891c88'),
+(3, 'Jose David', 'Rosales', '', 'jore@email.com', 2, 'jore', 'be59d545b4c6ee5c9f2da6bbf6ce667097a7e38bd75ade5dde564234fb891c88'),
 (4, 'Carlos', 'Lazaro', '', 'email@email.com', 2, 'carla', 'be59d545b4c6ee5c9f2da6bbf6ce667097a7e38bd75ade5dde564234fb891c88'),
 (5, 'Iris', 'Suay', '', 'email@email.com', 2, 'isu', 'be59d545b4c6ee5c9f2da6bbf6ce667097a7e38bd75ade5dde564234fb891c88'),
 (6, 'Nerea', 'Soler', '', 'email@email.com', 2, 'neso', 'be59d545b4c6ee5c9f2da6bbf6ce667097a7e38bd75ade5dde564234fb891c88'),
@@ -318,7 +318,7 @@ ALTER TABLE `multimedia`
 -- AUTO_INCREMENT de la tabla `participacion`
 --
 ALTER TABLE `participacion`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

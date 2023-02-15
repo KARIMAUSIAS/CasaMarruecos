@@ -129,7 +129,6 @@ public class UsuarioService {
         oUsuarioEntity.setApellido2(oUpdatedUsuarioEntity.getApellido2());
         oUsuarioEntity.setEmail(oUpdatedUsuarioEntity.getEmail());
         oUsuarioEntity.setUsuario(oUpdatedUsuarioEntity.getUsuario());
-        oUsuarioEntity.setTipousuario(oTipousuarioService.get(2L));
         return oUsuarioRepository.save(oUsuarioEntity);
     }
 
