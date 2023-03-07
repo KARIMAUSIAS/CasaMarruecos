@@ -1,6 +1,8 @@
 package com.casamarruecos.CasaMarruecos.service;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -109,6 +111,11 @@ public class MultimediaService {
         } else {
             throw new CannotPerformOperationException("no hay Multimediaes en la base de datos");
         }
+    }
+
+    public ArrayList<String> listaFotos(Long evento){
+
+        return oMultimediaRepository.findEvento(evento);
     }
 
 }

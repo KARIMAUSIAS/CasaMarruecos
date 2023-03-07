@@ -1,5 +1,6 @@
 package com.casamarruecos.CasaMarruecos.api;
 
+import java.util.ArrayList;
 
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,5 +72,10 @@ public class MultimediaController {
     @PostMapping("/generate/{amount}")
     public ResponseEntity<Long> generateSome(@PathVariable(value = "amount") Integer amount) {
         return new ResponseEntity<>(oMultimediaService.generateSome(amount), HttpStatus.OK);
+    }
+
+    @GetMapping("/fotos/{id_evento}")
+    public ResponseEntity<ArrayList<String>> listaEventos(@PathVariable(value = "id_evento") Long id_evento){
+        return new ResponseEntity<ArrayList<String>>(oMultimediaService.listaFotos( id_evento), HttpStatus.OK);
     }
 }
